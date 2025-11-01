@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Games Network Direct</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <div class="brand"><span class="dot"></span><span>Games Network Direct</span></div>
+<nav class="primary-nav" aria-label="Main navigation">
+    <ul class="nav-list">
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+      <label class="search" for="q">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 21l-4.2-4.2M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input id="q" type="text" placeholder="Search titles, tags…" autocomplete="off" />
+      </label>
+
+      <label class="switch" aria-label="Toggle dark mode">
+        <input id="themeToggle" type="checkbox" />
+        <span class="knob"></span>
+      </label>
+    </header>
+
+    <section class="hero">
+      <h1>Filter by genre and tags</h1>
+      <p class="muted" style="color:var(--muted)">Toggle chips to filter. Combine with search for finer results.</p>
+    </section>
+
+    <!-- Filter chips: add/remove without JS changes -->
+    <div class="filters" id="filters">
+      <!-- Use lowercase values; they match data-tags on cards -->
+      <button class="chip" data-tag="all">All</button>
+      <button class="chip" data-tag="action">Action</button>
+      <button class="chip" data-tag="adventure">Adventure</button>
+      <button class="chip" data-tag="rpg">RPG</button>
+      <button class="chip" data-tag="fps">FPS</button>
+      <button class="chip" data-tag="racing">Racing</button>
+      <button class="chip" data-tag="open-world">Open‑world</button>
+      <button class="chip" data-tag="horror">Horror</button>
+      <button class="chip" data-tag="sports">Sports</button>
+      <button class="chip" data-tag="simulation">Simulation</button>
+      <button class="chip" data-tag="strategy">Strategy</button>
+      <button class="chip" data-tag="pc">PC</button>
+      <button class="chip" data-tag="switch">Switch</button>
+    </div>
+
+    <!-- Grid: paste the SAME .card blocks you use on index.html -->
+    <section class="grid" id="grid">
+      <!-- Example cards (copy your actual ones here) -->
+      <article class="card" data-tags="action adventure open-world pc" data-title="The Legend of Zelda: Echoes of Wisdom">
+        <div class="thumb">
+          <img src="images/tloz wisdom.jfif" alt="The Legend of Zelda Echoes of Wisdom cover" />
+          <span class="badge">New</span>
+        </div>
+        <div class="body">
+          <h3 class="title">The Legend of Zelda: Echoes of Wisdom</h3>
+          <div class="tags">
+            <span class="tag">Action</span>
+            <span class="tag">Adventure</span>
+            <span class="tag">Switch</span>
+          </div>
+          <p class="desc">Harness wisdom to explore Hyrule, conquer dungeons, and solve rift mysteries.</p>
+          <div class="actions">
+            <a class="btn" href="torrent/tloz echos of wisdom.torrent" download>Download</a>
+            <a class="btn ghost" href="#details-zelda">Details</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="racing open-world pc" data-title="Forza Horizon 5">
+        <div class="thumb">
+          <img src="images/forza 5.png" alt="Forza Horizon 5 cover art" />
+          <span class="badge">Premium</span>
+        </div>
+        <div class="body">
+          <h3 class="title">Forza Horizon 5</h3>
+          <div class="tags">
+            <span class="tag">Racing</span>
+            <span class="tag">Open-world</span>
+            <span class="tag">PC</span>
+          </div>
+          <p class="desc">Race across vibrant Mexico with dynamic seasons and deep customization.</p>
+          <div class="actions">
+            <a class="btn" href="torrent/forza horizon 5 [fitgirl repack].torrent" download>Download</a>
+            <a class="btn ghost" href="#details-forza5">Details</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="fps action pc" data-title="Call of Duty: Modern Warfare 3">
+        <div class="thumb">
+          <img src="images/cod mw.png" alt="Call of Duty Modern Warfare 3 cover" />
+          <span class="badge">Updated</span>
+        </div>
+        <div class="body">
+          <h3 class="title">Call of Duty: Modern Warfare 3</h3>
+          <div class="tags">
+            <span class="tag">FPS</span>
+            <span class="tag">Action</span>
+            <span class="tag">PC</span>
+          </div>
+          <p class="desc">Cinematic action and competitive modes in a modern battlefield.</p>
+          <div class="actions">
+            <a class="btn" href="torrent/call of duty modern warfare 3.torrent" download>Download</a>
+            <a class="btn ghost" href="#details-mw3">Details</a>
+          </div>
+        </div>
+      </article>
+
+
+      
+      <!-- Paste more cards from your index page -->
+    </section>
+
+    <footer id="footer" role="contentinfo" aria-label="Site footer">
+  <div id="copyright">
+    <p>Games Network Direct © 2025. All Rights Reserved.</p>
+    <p>
+      Made with <span aria-hidden="true">❤</span> by
+      <a href="https://moeezmir.netlify.app/" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">
+        Mir Moeez
+      </a>
+    </p>
+  </div>
+</footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

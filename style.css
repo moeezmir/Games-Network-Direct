@@ -1,0 +1,188 @@
+  :root {
+      --bg: #0b0d10;
+      --elev: #12151a;
+      --card: #141821;
+      --text: #e6e9ef;
+      --muted: #a5adba;
+      --brand: #7c6cff;
+      --brand-2: #00e0b8;
+      --radius: 16px;
+      --gap: clamp(14px, 2vw, 22px);
+      color-scheme: dark;
+    }
+    html.light {
+      --bg: #f6f7fb; --elev:#fff; --card:#fff; --text:#0f1221; --muted:#5c6577;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: clamp(18px,3vw,36px); }
+
+    .nav {
+      display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 14px; padding: 10px 14px;
+      position: sticky; top: 12px; backdrop-filter: blur(10px); z-index: 10;
+    }
+    .brand { display:flex; gap:10px; align-items:center; font-weight:800; }
+    .dot { width:10px; height:10px; background: linear-gradient(135deg,var(--brand),var(--brand-2)); border-radius:50%; }
+
+    .search {
+      display:flex; gap:8px; align-items:center; background: var(--elev);
+      border:1px solid rgba(255,255,255,.08); border-radius:999px; padding:8px 12px;
+      min-width: 240px; width: min(40vw, 520px);
+    }
+    .search input { flex:1; background:transparent; border:0; color:var(--text); outline:none; font-size:14px; }
+
+    .switch { width: 48px; height: 28px; background: var(--elev); border:1px solid rgba(255,255,255,.1); border-radius:999px; position:relative; }
+    .switch input { display:none; }
+    .switch .knob { position:absolute; top:3px; left:3px; width:22px; height:22px; background:#fff; border-radius:50%; transition: transform .2s ease; box-shadow: 0 6px 12px rgba(0,0,0,.25); }
+    .switch input:checked + .knob { transform: translateX(20px); }
+
+    .hero { margin: 18px 0 6px; }
+    .hero h1 { margin:0; font-size: clamp(22px, 4vw, 36px); }
+
+    .filters {
+      margin: 14px 0 8px;
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .chip {
+      user-select: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+      border: 1px solid rgba(255,255,255,.1);
+      color: var(--text); font-weight: 600; font-size: 13px;
+      transition: background .15s ease, border-color .15s ease;
+    }
+    .chip input { display:none; }
+    .chip.active { border-color: rgba(124,108,255,.45); background: linear-gradient(135deg, rgba(124,108,255,.18), rgba(0,224,184,.18)); }
+
+    .grid {
+      display: grid; gap: var(--gap);
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      margin-top: 14px;
+    }
+    .card {
+      display: grid; grid-template-rows: 150px auto;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)), var(--card);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius); overflow: clip;
+    }
+    .thumb { background:#0a0d13; position:relative; }
+    .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+    .badge { position:absolute; top:10px; left:10px; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.15); }
+    .body { padding: 12px; display: grid; gap: 8px; }
+    .title { margin:0; font-size:16px; }
+    .tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .tag { font-size:11px; color: var(--muted); padding:4px 8px; border:1px solid rgba(255,255,255,.1); border-radius:999px; }
+    .actions { display:flex; gap:8px; }
+    .btn { flex:1; text-decoration:none; color:var(--text); padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.14); background: linear-gradient(135deg, rgba(124,108,255,.22), rgba(0,224,184,.22)); font-weight:600; font-size:14px; }
+    .btn.ghost { background: transparent; border-style: dashed; }
+
+    footer { margin: 28px 0 8px; color: var(--muted); font-size: 13px; text-align:center; }
+
+    @media (max-width: 520px){
+      .nav { grid-template-columns: 1fr; position: static; }
+      .search { width: 100%; }
+    }
+
+#footer {
+  margin: 30px 0 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 16px;
+  padding: 14px 18px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+#footer p {
+  margin: 6px 0;
+  color: var(--muted);
+}
+
+#footer a:hover {
+  filter: brightness(1.1);
+}
+.badge {
+  color: #0b0d10;
+  background: linear-gradient(135deg, #FFEC3D, #FFF176);
+  border: 1px solid rgba(0,0,0,.15);
+  text-shadow: none;
+}
+/* One-line header layout */
+header.nav {
+  display: flex;                 /* lay out children in a row */
+  align-items: center;           /* vertical centering */
+  justify-content: space-between;/* spread ends; tweak as needed */
+  gap: 1rem;                     /* spacing between items */
+  white-space: nowrap;           /* prevent wrapping to next line */
+  overflow-x: auto;              /* allow horizontal scroll if too narrow */
+  padding: 0.5rem 1rem;
+}
+
+/* Keep brand compact on the line */
+header.nav .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 auto;                /* don’t stretch */
+}
+
+/* Keep the nav inline */
+.primary-nav {
+  flex: 0 0 auto;                /* stay its natural width */
+}
+.primary-nav .nav-list {
+  display: inline-flex;          /* horizontal list */
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.primary-nav .nav-list > li {
+  display: inline-flex;
+}
+.primary-nav .nav-list a {
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+}
+
+/* Keep search control inline and compact */
+header.nav .search {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 1 auto;                /* can shrink slightly if needed */
+}
+header.nav .search input {
+  width: 18ch;                   /* fixed inline width to stay on one line */
+  max-width: 22ch;
+  min-width: 14ch;
+}
+
+/* Keep the theme switch inline */
+header.nav .switch {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+/* Optional: tighten on very small screens while still one-line */
+@media (max-width: 420px) {
+  header.nav {
+    gap: 0.5rem;
+  }
+  header.nav .search input {
+    width: 14ch;
+  }
+  .primary-nav .nav-list a {
+    padding: 0.375rem 0.5rem;
+  }
+}

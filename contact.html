@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Suggest or Request — Games Network Direct</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+    <style>
+        /* Games Network Direct — NeoGlass UI (with black inputs) - Elegant glass panels with animated accent grid - Premium focus rings and tactile controls - Black input fields with autofill fixes - Accessible contrast and keyboard focus */
+        /* Theme tokens */
+        :root {
+            --bg: #0a0d13;
+            --bg-2: #0c1017;
+            --panel: rgba(14, 18, 24, 0.6);
+            --panel-strong: rgba(16, 21, 28, 0.72);
+            --panel-border: rgba(255, 255, 255, 0.06);
+            --text: #e9edf6;
+            --muted: #a8b3c7;
+            --heading: #f6f8ff;
+            --primary: #7aa2ff;
+            --primary-600: #5b86ff;
+            --primary-700: #416ef7;
+            --danger: #ff6b7d;
+            --success: #2bd887;
+            --ring: rgba(122, 162, 255, 0.5);
+            --border: #1a2230;
+            --shadow-1: 0 10px 28px rgba(0, 0, 0, 0.35);
+            --shadow-2: 0 24px 80px rgba(0, 0, 0, 0.45);
+            --radius-xl: 22px;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 10px;
+            --space-1: .5rem;
+            --space-2: .75rem;
+            --space-3: 1rem;
+            --space-4: 1.25rem;
+            --space-5: 1.75rem;
+            --space-6: 2.25rem;
+            --blur: 16px;
+            --grid-alpha: 0.085;
+        }
+
+        /* Stage background: gradient, vignette, animated accent grid */
+        body {
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans;
+            color: var(--text);
+            min-height: 100dvh;
+            background: radial-gradient(1200px 520px at 78% -12%, rgba(122, 162, 255, 0.18), transparent 60%), radial-gradient(900px 420px at -8% 32%, rgba(43, 216, 135, 0.12), transparent 55%), linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+            overflow-x: hidden;
+        }
+
+        /* Subtle animated neon grid overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -40vmax;
+            pointer-events: none;
+            background: linear-gradient(transparent 31px, rgba(122, 162, 255, var(--grid-alpha)) 32px), linear-gradient(90deg, transparent 31px, rgba(122, 162, 255, var(--grid-alpha)) 32px);
+            background-size: 32px 32px, 32px 32px;
+            mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 1) 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 1) 70%);
+            filter: blur(0.6px) saturate(120%);
+            animation: gridFloat 24s linear infinite;
+            opacity: .55;
+        }
+
+        @keyframes gridFloat {
+            0% {
+                transform: translate3d(0, 0, 0) rotate(0.001deg);
+            }
+
+            50% {
+                transform: translate3d(18px, 12px, 0) rotate(0.001deg);
+            }
+
+            100% {
+                transform: translate3d(0, 0, 0) rotate(0.001deg);
+            }
+        }
+
+        /* Back button (top center) */
+        .back-wrap {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .6rem .9rem;
+            border-radius: 14px;
+            color: var(--text);
+            text-decoration: none;
+            backdrop-filter: saturate(130%) blur(12px);
+            -webkit-backdrop-filter: saturate(130%) blur(12px);
+            background: var(--panel);
+            border: 1px solid var(--panel-border);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: transform .08s ease, box-shadow .2s ease, border-color .2s ease, background-color .2s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-1px);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .back-btn:active {
+            transform: translateY(1px);
+        }
+
+        .back-btn:focus-visible {
+            outline: 2px solid transparent;
+            box-shadow: 0 0 0 3px var(--ring), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .back-btn svg {
+            display: block
+        }
+
+        /* Container */
+        .wrap {
+            max-width: 820px;
+            margin: clamp(1.5rem, 4vw, 4rem) auto;
+            padding: 0 var(--space-3);
+        }
+
+        /* NeoGlass card */
+        .card {
+            position: relative;
+            background: var(--panel);
+            backdrop-filter: saturate(130%) blur(var(--blur));
+            -webkit-backdrop-filter: saturate(130%) blur(var(--blur));
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius-xl);
+            padding: clamp(1rem, 2.6vw, var(--space-6));
+            box-shadow: var(--shadow-1), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            transition: transform .25s ease, box-shadow .3s ease, border-color .25s ease;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: -30%;
+            left: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(70% 30% at 40% 50%, rgba(122, 162, 255, 0.12), transparent 65%);
+            transform: rotate(-18deg);
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Header */
+        h1 {
+            margin: 0 0 .4rem 0;
+            color: var(--heading);
+            font-weight: 800;
+            letter-spacing: .2px;
+            font-size: clamp(1.35rem, 2.4vw, 2.1rem);
+            line-height: 1.15;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.02);
+        }
+
+        .muted {
+            color: var(--muted);
+            margin: 0 0 var(--space-5) 0;
+            font-size: clamp(.92rem, 1.5vw, 1rem);
+        }
+
+        /* Form layout */
+        form {
+            display: grid;
+            gap: var(--space-3);
+        }
+
+        /* Labels */
+        label {
+            font-size: .9rem;
+            color: var(--muted);
+            letter-spacing: .22px;
+        }
+
+        /* Controls: base visuals */
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        input[type="search"],
+        select,
+        textarea {
+            width: 100%;
+            color: var(--text);
+            background: linear-gradient(180deg, #0f141b 0%, #0b1117 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: .85rem 1rem;
+            outline: none;
+            transition: border-color .2s ease, box-shadow .22s ease, background .2s ease, transform .06s ease, filter .2s ease;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        }
+
+        textarea {
+            min-height: 168px;
+            resize: vertical;
+        }
+
+        select {
+            appearance: none;
+            background-image: linear-gradient(45deg, transparent 50%, rgba(233, 237, 246, 0.7) 50%), linear-gradient(135deg, rgba(233, 237, 246, 0.7) 50%, transparent 50%);
+            background-position: calc(100% - 16px) calc(50% - 3px), calc(100% - 11px) calc(50% - 3px);
+            background-size: 6px 6px, 6px 6px;
+            background-repeat: no-repeat;
+            padding-right: 2rem;
+        }
+
+        /* Hover/focus (base) */
+        input:hover,
+        textarea:hover,
+        select:hover {
+            border-color: rgba(122, 162, 255, 0.28);
+            filter: saturate(105%);
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--primary-600);
+            box-shadow: 0 0 0 3px var(--ring), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transform: translateY(-1px);
+        }
+
+        /* Placeholder */
+        ::placeholder {
+            color: rgba(205, 215, 230, 0.55);
+        }
+
+        /* Inline errors */
+        .error {
+            color: var(--danger);
+            font-size: .83rem;
+            min-height: 1em;
+            letter-spacing: .2px;
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            gap: var(--space-2);
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: .25rem;
+        }
+
+        /* Buttons */
+        .btn {
+            appearance: none;
+            border: 0;
+            border-radius: var(--radius-lg);
+            padding: .78rem 1.05rem;
+            font-weight: 750;
+            cursor: pointer;
+            transition: transform .06s ease, background-color .22s ease, box-shadow .22s ease, border-color .22s ease, filter .2s ease;
+            letter-spacing: .22px;
+            will-change: transform, box-shadow, filter;
+        }
+
+        .btn.primary {
+            background: radial-gradient(120% 140% at 0% 0%, var(--primary) 0%, var(--primary-600) 60%, var(--primary-700) 100%);
+            color: #fff;
+            box-shadow: 0 10px 28px rgba(122, 162, 255, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .btn.primary:hover {
+            filter: saturate(112%);
+            box-shadow: 0 14px 40px rgba(122, 162, 255, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn.ghost {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.015) 100%);
+            color: var(--text);
+            border: 1px solid var(--panel-border);
+        }
+
+        .btn.ghost:hover {
+            border-color: rgba(255, 255, 255, 0.14);
+            filter: saturate(106%);
+        }
+
+        /* Toasts */
+        .toast {
+            display: none;
+            margin-top: .45rem;
+            padding: .85rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: .96rem;
+            border: 1px solid transparent;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transform: translateY(6px);
+            opacity: 0;
+            transition: transform .25s ease, opacity .25s ease, box-shadow .25s ease, border-color .2s ease;
+        }
+
+        .toast.show {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            background: linear-gradient(180deg, rgba(43, 216, 135, 0.13), rgba(43, 216, 135, 0.09));
+            border-color: rgba(43, 216, 135, 0.5);
+            color: #c9f5de;
+            box-shadow: 0 10px 28px rgba(43, 216, 135, 0.2);
+        }
+
+        .toast.error {
+            background: linear-gradient(180deg, rgba(255, 107, 125, 0.13), rgba(255, 107, 125, 0.09));
+            border-color: rgba(255, 107, 125, 0.5);
+            color: #ffd6db;
+            box-shadow: 0 10px 28px rgba(255, 107, 125, 0.2);
+        }
+
+        /* Keyboard focus */
+        :where(input, select, textarea, .btn):focus-visible {
+            outline: 2px solid transparent;
+            box-shadow: 0 0 0 3px var(--ring), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        /* Field divider utility */
+        .hr {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            border: 0;
+            margin: var(--space-5) 0 var(--space-4);
+        }
+
+        /* Small screens */
+        @media (max-width: 480px) {
+            .wrap {
+                margin: 2rem auto;
+            }
+
+            h1 {
+                font-size: 1.35rem;
+            }
+        }
+
+        /* Reduce motion */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Black input overrides + autofill fixes */
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        input[type="search"],
+        select,
+        textarea {
+            background-color: #000 !important;
+            background-image: none !important;
+            color: var(--text);
+        }
+
+        input[type="text"]:hover,
+        input[type="email"]:hover,
+        input[type="url"]:hover,
+        input[type="search"]:hover,
+        select:hover,
+        textarea:hover {
+            background-color: #000 !important;
+            border-color: rgba(122, 162, 255, 0.28);
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="url"]:focus,
+        input[type="search"]:focus,
+        select:focus,
+        textarea:focus {
+            background-color: #000 !important;
+            border-color: var(--primary-600);
+            box-shadow: 0 0 0 3px var(--ring), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transform: translateY(-1px);
+        }
+
+        input:-webkit-autofill,
+        select:-webkit-autofill,
+        textarea:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px #000 inset !important;
+            -webkit-text-fill-color: var(--text) !important;
+            caret-color: var(--text);
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        #contactForm input[type="text"],
+        #contactForm input[type="email"],
+        #contactForm input[type="url"],
+        #contactForm input[type="search"],
+        #contactForm select,
+        #contactForm textarea {
+            background-color: #000 !important;
+            background-image: none !important;
+        }
+    </style>
+</head>
+
+<body> <!-- Back button fixed at top center -->
+    <div class="back-wrap"> <a class="back-btn" href="index.html" id="backLink" aria-label="Go back"> <svg width="18"
+                height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M14 7l-5 5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg> <span>Back</span> </a> </div>
+    <main class="wrap">
+        <section class="card">
+            <h1>Suggest a Game or Request an Update</h1>
+            <p class="muted">Share new game suggestions, missing titles, or request updates/patches. Please include
+                links if possible.</p>
+            <div id="contact">
+                <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+                    <!-- Required by Web3Forms -->
+                    <input type="hidden" name="access_key" value="91e2017f-e868-4f78-9d67-47fef7350fd6" />
+                    <!-- Default subject is overridden dynamically below -->
+                    <input type="hidden" name="subject" value="New request from Games Network Direct" />
+                    <input type="hidden" name="from_name" value="Games Network Direct" />
+                    <!-- Honeypot -->
+                    <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1"
+                        autocomplete="off" />
+
+                    <!-- Your info -->
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your Name" />
+                    <span class="error" id="nameError"></span>
+
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email" />
+                    <span class="error" id="emailError"></span>
+
+                    <!-- Request details -->
+                    <label for="requestType">Request Type</label>
+                    <select id="requestType" name="requestType" required>
+                        <option value="" selected disabled>Select one</option>
+                        <option value="suggestion">Suggest a new game</option>
+                        <option value="update">Request update/patch/DLC</option>
+                        <option value="fix">Report a broken link</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <span class="error" id="typeError"></span>
+
+                    <label for="platform">Platform</label>
+                    <select id="platform" name="platform" required>
+                        <option value="" selected disabled>Select platform</option>
+                        <option value="pc">PC</option>
+                        <option value="switch">Switch</option>
+                        <option value="ps">PlayStation</option>
+                        <option value="xbox">Xbox</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <span class="error" id="platformError"></span>
+
+                    <label for="gameTitle">Game Title</label>
+                    <input type="text" id="gameTitle" name="gameTitle" required placeholder="e.g., Forza Horizon 5" />
+                    <span class="error" id="titleError"></span>
+
+                    <label for="versionBuild">Version / Build (optional)</label>
+                    <input type="text" id="versionBuild" name="versionBuild" placeholder="e.g., v2.593 or Patch 1.05" />
+
+                    <label for="referenceLink">Reference Link (optional)</label>
+                    <input type="url" id="referenceLink" name="referenceLink"
+                        placeholder="Official site, store page, or patch notes URL" />
+
+                    <label for="message">Details</label>
+                    <textarea id="message" name="message" required
+                        placeholder="Describe what you need (DLC name, patch notes, region, repack preference, etc.)"></textarea>
+                    <span class="error" id="messageError"></span>
+
+                    <div class="actions">
+                        <button type="submit" class="btn primary">Submit Request</button>
+                        <button type="reset" class="btn ghost">Reset</button>
+                        <span id="toast" class="toast" role="status" aria-live="polite"></span>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script>
+  // Back link: prefer history back, fallback to index.html via href
+  const backLink = document.getElementById('backLink');
+  if (backLink) {
+    backLink.addEventListener('click', (e) => {
+      if (window.history.length > 1) {
+        e.preventDefault();
+        window.history.back();
+      }
+    });
+  }
+
+  // Elements
+  const form = document.getElementById('contactForm');
+  const toast = document.getElementById('toast');
+
+  const nameEl = document.getElementById('name');
+  const emailEl = document.getElementById('email');
+  const typeEl = document.getElementById('requestType');
+  const platformEl = document.getElementById('platform');
+  const titleEl = document.getElementById('gameTitle');
+  const versionEl = document.getElementById('versionBuild'); // reserved if needed later
+  const linkEl = document.getElementById('referenceLink');
+  const messageEl = document.getElementById('message');
+
+  const nameError = document.getElementById('nameError');
+  const emailError = document.getElementById('emailError');
+  const typeError = document.getElementById('typeError');
+  const platformError = document.getElementById('platformError');
+  const titleError = document.getElementById('titleError');
+  const messageError = document.getElementById('messageError');
+
+  // Toast helper
+  function showToast(message, type = 'success') {
+    if (!toast) return;
+    toast.textContent = message;
+    toast.className = 'toast show ' + (type === 'error' ? 'error' : 'success');
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 5000);
+  }
+
+  // Validation
+  function validate() {
+    let ok = true;
+
+    if (nameError) nameError.textContent = '';
+    if (emailError) emailError.textContent = '';
+    if (typeError) typeError.textContent = '';
+    if (platformError) platformError.textContent = '';
+    if (titleError) titleError.textContent = '';
+    if (messageError) messageError.textContent = '';
+
+    if (!nameEl.value.trim()) {
+      if (nameError) nameError.textContent = 'Please enter your name.';
+      ok = false;
+    }
+    if (!emailEl.validity.valid) {
+      if (emailError) emailError.textContent = 'Please enter a valid email.';
+      ok = false;
+    }
+    if (!typeEl.value) {
+      if (typeError) typeError.textContent = 'Please select a request type.';
+      ok = false;
+    }
+    if (!platformEl.value) {
+      if (platformError) platformError.textContent = 'Please select a platform.';
+      ok = false;
+    }
+    if (!titleEl.value.trim()) {
+      if (titleError) titleError.textContent = 'Please enter a game title.';
+      ok = false;
+    }
+    if (!messageEl.value.trim()) {
+      if (messageError) messageError.textContent = 'Please add some details.';
+      ok = false;
+    }
+    if (linkEl.value && !/^https?:\/\//i.test(linkEl.value)) {
+      showToast('Reference link must start with http:// or https://', 'error');
+      ok = false;
+    }
+
+    return ok;
+  }
+
+  // Build dynamic subject for better inbox triage
+  function buildSubject(formData) {
+    const type = formData.get('requestType') || 'request';
+    const title = formData.get('gameTitle') || 'Untitled';
+    const platform = (formData.get('platform') || '').toUpperCase();
+    const cap = (s) => s ? s.charAt(0).toUpperCase() + s.slice(1) : 'Request';
+    return `[${cap(type)}]${platform ? '[' + platform + ']' : ''} ${title}`;
+  }
+
+  // Submit handler
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validate()) return;
+
+      const formData = new FormData(form);
+
+      // Dynamic subject
+      const dynamicSubject = buildSubject(formData);
+      formData.set('subject', dynamicSubject);
+
+      // JSON payload for Web3Forms
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      showToast('Sending…', 'success');
+
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: json
+        });
+
+        const data = await response.json();
+
+        if (response.status === 200) {
+          showToast(data.message || 'Request submitted successfully!');
+          form.reset();
+        } else {
+          showToast(data.message || 'Something went wrong.', 'error');
+        }
+      } catch (err) {
+        showToast('Network error. Please try again.', 'error');
+      }
+    });
+  }
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+<article class="card" data-tags="rpg open-world" data-title="Cyberpunk 2077">
+  <div class="thumb">
+    <img src="images/cyberpunk.png" alt="Cyberpunk 2077 cover" />
+    <span class="badge">Updated</span>
+  </div>
+  <div class="body">
+    <h3 class="title">Cyberpunk 2077</h3>
+    <div class="tags">
+      <span class="tag">RPG</span>
+      <span class="tag">Open-world</span>
+      <span class="tag">PC</span>
+    </div>
+    <p class="desc">Dive into Night City’s dense storylines, deep builds, and high-tech combat.</p>
+    <div class="actions">
+      <a class="btn" href="torrent/Cyberpunk_2077.torrent" download>Download</a>
+      <a class="btn ghost" href="#details-cp2077">Details</a>
+    </div>
+  </div>
+</article>
